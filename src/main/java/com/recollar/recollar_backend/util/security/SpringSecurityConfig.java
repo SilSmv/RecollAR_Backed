@@ -1,4 +1,5 @@
 package com.recollar.recollar_backend.util.security;
+import com.recollar.recollar_backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Se logra ejecutar la seguridad.
     @Resource
-    private UserDetailsService authService;
+    private UserService userService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -28,7 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(this.authService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(this.userService).passwordEncoder(passwordEncoder());
 
     }
 

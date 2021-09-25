@@ -1,4 +1,5 @@
 package com.recollar.recollar_backend.util.security;
+import com.recollar.recollar_backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,10 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.UserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -35,6 +39,9 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
     @Resource
     private InfoAdditionalToken infoAdditionalToken;
 
+    @Resource
+    private UserService userService;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
@@ -43,6 +50,12 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
 
     }
 
+    @Bean
+    public UserAuthenticationConverter userAuthenticationConverter() {
+        DefaultUserAuthenticationConverter defaultUserAuthenticationConverter = new DefaultUserAuthenticationConverter();
+        defaultUserAuthenticationConverter.setUserDetailsService(userService);
+        return defaultUserAuthenticationConverter;
+    }
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("recollar1")
@@ -62,7 +75,8 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
 
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
-                .tokenEnhancer(tokenEnhancerChain);
+                .tokenEnhancer(tokenEnhancerChain)
+                .userDetailsService(userService);;
     }
 
     @Bean
@@ -74,6 +88,8 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setSigningKey(LLAVE_SECRETA);
+        ((DefaultAccessTokenConverter) jwtAccessTokenConverter.getAccessTokenConverter())
+                .setUserTokenConverter(userAuthenticationConverter());
         return jwtAccessTokenConverter;
     }
 }
