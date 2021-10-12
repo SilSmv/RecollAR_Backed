@@ -30,6 +30,9 @@ public class CollectionController {
         collectionService.updateCollection(collectionRequest,transaction);
     }
 
-
-
+    @DeleteMapping
+    public void delete(@RequestBody Integer idCollection, HttpServletRequest request) throws Exception {
+        Transaction transaction= TransactionUtil.createTransaction(request);
+        collectionService.deleteCollection(idCollection,transaction);
+    }
 }

@@ -12,6 +12,6 @@ import java.util.Date;
 public interface CollectionsRepository extends JpaRepository<CollectionsModel,String> {
     @Modifying
     @Transactional
-    @Query("update collection h SET h.status = ?1, h.txHost = ?3, h.txIdAdministrator = ?4, h.txUpdate = ?5 WHERE h.idHospital = ?2")
-    public void updateStatus(Integer status, Integer idHospital, String txHost, Integer txIdAdmi, Date txUpdate);
+    @Query("update collection h SET h.status = ?1, h.txHost = ?2, h.txUpdate = ?3 WHERE h.idCollection = ?4")
+    public void updateStatus(Integer status, String txHost, Date txUpdate, Integer idCollection);
 }

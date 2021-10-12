@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.Date;
 
 @Service
 @Transactional
@@ -36,10 +37,13 @@ public class CollectionService {
         collectionModel.setAmount(collectionRequest.getAmount());
         collectionModel.setStatus(collectionRequest.getStatus());
         collectionModel.setTransaction(transaction);
+
         collectionsRepository.save(collectionModel);
+        System.out.println();
     }
-    public void deleteCollection(CollectionRequest collectionRequest, Transaction transaction){
-       // collectionsRepository.update(collectionModel);
+    public void deleteCollection(Integer idCollection, Transaction transaction){
+        int status = 0 ;
+        collectionsRepository.updateStatus(status, transaction.getTxHost(),transaction.getTxUpdate(), idCollection);
     }
 
 }
