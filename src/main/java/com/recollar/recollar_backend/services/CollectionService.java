@@ -29,13 +29,14 @@ public class CollectionService {
     }
 
     public void updateCollection(CollectionRequest collectionRequest, Transaction transaction){
+        int status = 1 ;
         CollectionsModel collectionModel = new CollectionsModel();
         collectionModel.setIdCollection(collectionRequest.getIdCollection());
         collectionModel.setIdCollector(collectionRequest.getIdCollector());
         collectionModel.setName(collectionRequest.getName());
         collectionModel.setColor(collectionRequest.getColor());
         collectionModel.setAmount(collectionRequest.getAmount());
-        collectionModel.setStatus(collectionRequest.getStatus());
+        collectionModel.setStatus(status);
         collectionModel.setTransaction(transaction);
 
         collectionsRepository.save(collectionModel);
