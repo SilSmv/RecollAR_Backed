@@ -158,6 +158,8 @@ CREATE TABLE category (
                           CONSTRAINT category_pk PRIMARY KEY (id_category)
 );
 
+INSERT INTO category VALUES (1,"monedas"),(2,"figuras de accion");
+
 -- Table: collection
 
 CREATE TABLE collection (
@@ -166,6 +168,7 @@ CREATE TABLE collection (
                             name varchar(100) NOT NULL,
                             color varchar(6) NOT NULL,
                             amount int NOT NULL,
+                            id_category int NOT NULL,
                             status int(2) NOT NULL,
                             tx_date datetime NOT NULL,
                             tx_id_user int NOT NULL,
@@ -185,6 +188,7 @@ CREATE TABLE h_collection (
                               name varchar(100) NOT NULL,
                               color varchar(6) NOT NULL,
                               amount int NOT NULL,
+                              id_category int NOT NULL,
                               status int(2) NOT NULL,
                               tx_date datetime NOT NULL,
                               tx_id_user int NOT NULL,
@@ -290,7 +294,7 @@ ALTER TABLE h_user ADD CONSTRAINT h_user_user FOREIGN KEY h_user_user (id_user)
     REFERENCES user (id_user);
 
 -- Reference: object_category (table: object)
-ALTER TABLE object ADD CONSTRAINT object_category FOREIGN KEY object_category (id_category)
+ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection_category (id_category)
     REFERENCES category (id_category);
 
 -- Reference: object_collection (table: object)

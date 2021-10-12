@@ -24,6 +24,7 @@ public class CollectionService {
         collectionModel.setColor(collectionRequest.getColor());
         collectionModel.setAmount(collectionRequest.getAmount());
         collectionModel.setStatus(status);
+        collectionModel.setIdCategory(collectionRequest.getIdCategory());
         collectionModel.setTransaction(transaction);
         collectionsRepository.save(collectionModel);
     }
@@ -37,6 +38,7 @@ public class CollectionService {
         collectionModel.setColor(collectionRequest.getColor());
         collectionModel.setAmount(collectionRequest.getAmount());
         collectionModel.setStatus(status);
+        collectionModel.setIdCategory(collectionRequest.getIdCategory());
         collectionModel.setTransaction(transaction);
 
         collectionsRepository.save(collectionModel);

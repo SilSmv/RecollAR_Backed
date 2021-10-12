@@ -7,6 +7,15 @@ public class CollectionRequest {
     private String color;
     private int amount;
     private int status;
+    private int idCategory;
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
 
     public int getStatus() {
         return status;

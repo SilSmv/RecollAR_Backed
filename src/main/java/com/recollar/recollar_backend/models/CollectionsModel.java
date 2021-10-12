@@ -14,6 +14,8 @@ public class CollectionsModel {
     private String color;
     private int amount;
     private int status;
+    @Column(name = "id_category")
+    private int idCategory;
     @Column(name = "tx_date")
     private Date txDate;
     @Column(name = "tx_id_user")
@@ -22,6 +24,14 @@ public class CollectionsModel {
     private String txHost;
     @Column(name = "tx_update")
     private Date txUpdate;
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
+    }
 
     public int getStatus() {
         return status;
