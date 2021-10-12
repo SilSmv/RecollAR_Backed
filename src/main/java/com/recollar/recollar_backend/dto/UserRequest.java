@@ -1,7 +1,5 @@
 package com.recollar.recollar_backend.dto;
-
 import javax.persistence.*;
-
 
 public class UserRequest {
     private String firstName;
@@ -13,6 +11,7 @@ public class UserRequest {
 
     public UserRequest() {
     }
+
     public UserRequest(UserRequestInterface userRequestInterface){
         this.firstName=userRequestInterface.getFirstName();
         this.lastName= userRequestInterface.getLastName();
@@ -29,7 +28,6 @@ public class UserRequest {
     public String getLastName() {
         return lastName;
     }
-
 
     public String getEmail() {
         return email;

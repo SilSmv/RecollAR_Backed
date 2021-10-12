@@ -150,3 +150,205 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-10-11  9:54:54
+
+CREATE TABLE category (
+                          id_category int NOT NULL,
+                          name varchar(50) NOT NULL,
+                          CONSTRAINT category_pk PRIMARY KEY (id_category)
+);
+
+-- Table: collection
+CREATE TABLE collection (
+                            id_collection int NOT NULL,
+                            id_collector int NOT NULL,
+                            name varchar(100) NOT NULL,
+                            color varchar(6) NOT NULL,
+                            amount int NOT NULL,
+                            tx_date datetime NOT NULL,
+                            tx_id_user int NOT NULL,
+                            tx_host varchar(100) NOT NULL,
+                            tx_update datetime NOT NULL,
+                            CONSTRAINT collection_pk PRIMARY KEY (id_collection)
+);
+
+-- Table: collector
+CREATE TABLE collector (
+                           id_collector int NOT NULL AUTO_INCREMENT,
+                           id_person int NOT NULL,
+                           id_user int NOT NULL,
+                           status tinyint NOT NULL,
+                           image_path varchar(255) NULL,
+                           tx_date datetime NOT NULL,
+                           tx_id_user int NOT NULL,
+                           tx_host varchar(100) NOT NULL,
+                           tx_update datetime NOT NULL,
+                           CONSTRAINT collector_pk PRIMARY KEY (id_collector)
+);
+
+-- Table: h_collection
+CREATE TABLE h_collection (
+                              id_h_collection int NOT NULL,
+                              id_collection int NOT NULL,
+                              id_collector int NOT NULL,
+                              name varchar(100) NOT NULL,
+                              color varchar(6) NOT NULL,
+                              amount int NOT NULL,
+                              tx_date datetime NOT NULL,
+                              tx_id_user int NOT NULL,
+                              tx_host varchar(100) NOT NULL,
+                              tx_update datetime NOT NULL,
+                              CONSTRAINT h_collection_pk PRIMARY KEY (id_h_collection)
+);
+
+-- Table: h_collector
+CREATE TABLE h_collector (
+                             id_h_collector int NOT NULL,
+                             id_collector int NOT NULL,
+                             id_person int NOT NULL,
+                             id_user int NOT NULL,
+                             status tinyint NOT NULL,
+                             image_path varchar(255) NULL,
+                             tx_date datetime NOT NULL,
+                             tx_id_user int NOT NULL,
+                             tx_host varchar(100) NOT NULL,
+                             tx_update datetime NOT NULL,
+                             CONSTRAINT h_collector_pk PRIMARY KEY (id_h_collector)
+);
+
+-- Table: h_object
+CREATE TABLE h_object (
+                          id_h_object int NOT NULL,
+                          id_object int NOT NULL,
+                          id_collection int NOT NULL,
+                          id_category int NOT NULL,
+                          name varchar(100) NOT NULL,
+                          description varchar(255) NOT NULL,
+                          image varchar(255) NOT NULL,
+                          status int(2) NOT NULL,
+                          object_status int NOT NULL,
+                          price decimal(10,2) NOT NULL,
+                          tx_date datetime NOT NULL,
+                          tx_id_user int NOT NULL,
+                          tx_host varchar(100) NOT NULL,
+                          tx_update datetime NOT NULL,
+                          CONSTRAINT h_object_pk PRIMARY KEY (id_h_object)
+);
+
+-- Table: h_person
+CREATE TABLE h_person (
+                          id_h_person int NOT NULL AUTO_INCREMENT,
+                          id_person int NOT NULL ,
+                          first_name varchar(100) NOT NULL,
+                          last_name varchar(100) NOT NULL,
+                          phone_number varchar(50) NOT NULL,
+                          status tinyint NOT NULL,
+                          tx_date datetime NOT NULL,
+                          tx_id_user int NOT NULL,
+                          tx_host varchar(100) NOT NULL,
+                          tx_update datetime NOT NULL,
+                          person_id_person int NOT NULL,
+                          CONSTRAINT h_person_pk PRIMARY KEY (id_h_person)
+);
+
+-- Table: h_user
+CREATE TABLE h_user (
+                        id_h_user int NOT NULL AUTO_INCREMENT,
+                        id_user int NOT NULL,
+                        password varchar(50) NOT NULL,
+                        email varchar(100) NOT NULL,
+                        status tinyint NOT NULL,
+                        tx_date datetime NOT NULL,
+                        tx_id_user int NOT NULL,
+                        tx_host varchar(100) NOT NULL,
+                        tx_update datetime NOT NULL,
+                        CONSTRAINT h_user_pk PRIMARY KEY (id_h_user)
+);
+
+-- Table: object
+CREATE TABLE object (
+                        id_object int NOT NULL AUTO_INCREMENT,
+                        id_collection int NOT NULL,
+                        id_category int NOT NULL,
+                        name varchar(100) NOT NULL,
+                        description varchar(255) NOT NULL,
+                        image varchar(255) NOT NULL,
+                        status int(2) NOT NULL,
+                        object_status int NOT NULL,
+                        price decimal(10,2) NOT NULL,
+                        tx_date datetime NOT NULL,
+                        tx_id_user int NOT NULL,
+                        tx_host varchar(100) NOT NULL,
+                        tx_update datetime NOT NULL,
+                        CONSTRAINT object_pk PRIMARY KEY (id_object)
+);
+
+-- Table: person
+CREATE TABLE person (
+                        id_person int NOT NULL AUTO_INCREMENT,
+                        first_name varchar(100) NOT NULL,
+                        last_name varchar(100) NOT NULL,
+                        phone_number varchar(50) NOT NULL,
+                        status tinyint NOT NULL,
+                        tx_date datetime NOT NULL,
+                        tx_id_user int NOT NULL,
+                        tx_host varchar(100) NOT NULL,
+                        tx_update datetime NOT NULL,
+                        CONSTRAINT person_pk PRIMARY KEY (id_person)
+);
+
+-- Table: user
+CREATE TABLE user (
+                      id_user int NOT NULL AUTO_INCREMENT,
+                      password varchar(50) NOT NULL,
+                      email varchar(100) NOT NULL,
+                      status tinyint NOT NULL,
+                      tx_date datetime NOT NULL,
+                      tx_id_user int NOT NULL,
+                      tx_host varchar(100) NOT NULL,
+                      tx_update datetime NOT NULL,
+                      CONSTRAINT user_pk PRIMARY KEY (id_user)
+);
+
+-- foreign keys
+-- Reference: collection_collector (table: collection)
+ALTER TABLE collection ADD CONSTRAINT collection_collector FOREIGN KEY collection_collector (id_collector)
+    REFERENCES collector (id_collector);
+
+-- Reference: collector_person (table: collector)
+ALTER TABLE collector ADD CONSTRAINT collector_person FOREIGN KEY collector_person (id_person)
+    REFERENCES person (id_person);
+
+-- Reference: collector_user (table: collector)
+ALTER TABLE collector ADD CONSTRAINT collector_user FOREIGN KEY collector_user (id_user)
+    REFERENCES user (id_user);
+
+-- Reference: h_collection_collection (table: h_collection)
+ALTER TABLE h_collection ADD CONSTRAINT h_collection_collection FOREIGN KEY h_collection_collection (id_collection)
+    REFERENCES collection (id_collection);
+
+-- Reference: h_collector_collector (table: h_collector)
+ALTER TABLE h_collector ADD CONSTRAINT h_collector_collector FOREIGN KEY h_collector_collector (id_collector)
+    REFERENCES collector (id_collector);
+
+-- Reference: h_object_object (table: h_object)
+ALTER TABLE h_object ADD CONSTRAINT h_object_object FOREIGN KEY h_object_object (id_object)
+    REFERENCES object (id_object);
+
+-- Reference: h_person_person (table: h_person)
+ALTER TABLE h_person ADD CONSTRAINT h_person_person FOREIGN KEY h_person_person (person_id_person)
+    REFERENCES person (id_person);
+
+-- Reference: h_user_user (table: h_user)
+ALTER TABLE h_user ADD CONSTRAINT h_user_user FOREIGN KEY h_user_user (id_user)
+    REFERENCES user (id_user);
+
+-- Reference: object_category (table: object)
+ALTER TABLE object ADD CONSTRAINT object_category FOREIGN KEY object_category (id_category)
+    REFERENCES category (id_category);
+
+-- Reference: object_collection (table: object)
+ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
+    REFERENCES collection (id_collection);
+
+-- End of file.
+
