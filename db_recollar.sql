@@ -217,7 +217,6 @@ CREATE TABLE h_object (
                           id_h_object int NOT NULL AUTO_INCREMENT,
                           id_object int NOT NULL,
                           id_collection int NOT NULL,
-                          id_category int NOT NULL,
                           name varchar(100) NOT NULL,
                           description varchar(255) NOT NULL,
                           image varchar(255) NOT NULL,
@@ -252,7 +251,6 @@ CREATE TABLE h_person (
 CREATE TABLE object (
                         id_object int NOT NULL AUTO_INCREMENT,
                         id_collection int NOT NULL,
-                        id_category int NOT NULL,
                         name varchar(100) NOT NULL,
                         description varchar(255) NOT NULL,
                         image varchar(255) NOT NULL,
@@ -301,5 +299,6 @@ ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection
 ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
     REFERENCES collection (id_collection);
 
+select * from collection;
 -- End of file.
 
