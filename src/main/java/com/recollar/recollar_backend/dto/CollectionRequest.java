@@ -1,12 +1,27 @@
 package com.recollar.recollar_backend.dto;
 
 public class CollectionRequest {
+    private int idCollection;
     private int idCollector;
     private String name;
     private String color;
     private int amount;
+    private int status;
 
-    public CollectionRequest() {
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getIdCollection() {
+        return idCollection;
+    }
+
+    public void setIdCollection(int idCollection) {
+        this.idCollection = idCollection;
     }
 
     public int getIdCollector() {

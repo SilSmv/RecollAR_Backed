@@ -1,15 +1,11 @@
 package com.recollar.recollar_backend.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 import java.sql.Date;
 
 @Entity(name = "collection")
-public class CollectionModel {
+public class CollectionsModel {
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idCollection;
     @Column(name = "id_collector")
@@ -17,6 +13,7 @@ public class CollectionModel {
     private String name;
     private String color;
     private int amount;
+    private int status;
     @Column(name = "tx_date")
     private Date txDate;
     @Column(name = "tx_id_user")
@@ -26,6 +23,13 @@ public class CollectionModel {
     @Column(name = "tx_update")
     private Date txUpdate;
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getIdCollection() {
         return idCollection;

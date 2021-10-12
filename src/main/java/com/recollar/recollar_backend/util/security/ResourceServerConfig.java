@@ -33,6 +33,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/collection").permitAll()
+                .antMatchers(HttpMethod.PUgit T, "/collection").permitAll()
                 .anyRequest (). authenticated ()
                 .and().cors().configurationSource(corsConfigurationSource());
 

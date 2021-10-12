@@ -3,7 +3,8 @@
 -- Host: 127.0.0.1    Database: db_recollar
 -- ------------------------------------------------------
 -- Server version	5.7.31
-
+drop database db_recollar;
+create database db_recollar;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -18,7 +19,7 @@
 --
 -- Table structure for table `collector`
 --
-
+use db_recollar;
 DROP TABLE IF EXISTS `collector`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -152,18 +153,20 @@ UNLOCK TABLES;
 -- Dump completed on 2021-10-11  9:54:54
 
 CREATE TABLE category (
-                          id_category int NOT NULL,
+                          id_category int NOT NULL AUTO_INCREMENT,
                           name varchar(50) NOT NULL,
                           CONSTRAINT category_pk PRIMARY KEY (id_category)
 );
 
 -- Table: collection
+
 CREATE TABLE collection (
-                            id_collection int NOT NULL,
+                            id_collection int NOT NULL AUTO_INCREMENT,
                             id_collector int NOT NULL,
                             name varchar(100) NOT NULL,
                             color varchar(6) NOT NULL,
                             amount int NOT NULL,
+                            status int(2) NOT NULL,
                             tx_date datetime NOT NULL,
                             tx_id_user int NOT NULL,
                             tx_host varchar(100) NOT NULL,
@@ -172,27 +175,17 @@ CREATE TABLE collection (
 );
 
 -- Table: collector
-CREATE TABLE collector (
-                           id_collector int NOT NULL AUTO_INCREMENT,
-                           id_person int NOT NULL,
-                           id_user int NOT NULL,
-                           status tinyint NOT NULL,
-                           image_path varchar(255) NULL,
-                           tx_date datetime NOT NULL,
-                           tx_id_user int NOT NULL,
-                           tx_host varchar(100) NOT NULL,
-                           tx_update datetime NOT NULL,
-                           CONSTRAINT collector_pk PRIMARY KEY (id_collector)
-);
+
 
 -- Table: h_collection
 CREATE TABLE h_collection (
-                              id_h_collection int NOT NULL,
+                              id_h_collection int NOT NULL AUTO_INCREMENT,
                               id_collection int NOT NULL,
                               id_collector int NOT NULL,
                               name varchar(100) NOT NULL,
                               color varchar(6) NOT NULL,
                               amount int NOT NULL,
+                              status int(2) NOT NULL,
                               tx_date datetime NOT NULL,
                               tx_id_user int NOT NULL,
                               tx_host varchar(100) NOT NULL,
@@ -202,7 +195,7 @@ CREATE TABLE h_collection (
 
 -- Table: h_collector
 CREATE TABLE h_collector (
-                             id_h_collector int NOT NULL,
+                             id_h_collector int NOT NULL AUTO_INCREMENT,
                              id_collector int NOT NULL,
                              id_person int NOT NULL,
                              id_user int NOT NULL,
@@ -217,7 +210,7 @@ CREATE TABLE h_collector (
 
 -- Table: h_object
 CREATE TABLE h_object (
-                          id_h_object int NOT NULL,
+                          id_h_object int NOT NULL AUTO_INCREMENT,
                           id_object int NOT NULL,
                           id_collection int NOT NULL,
                           id_category int NOT NULL,
@@ -250,19 +243,6 @@ CREATE TABLE h_person (
                           CONSTRAINT h_person_pk PRIMARY KEY (id_h_person)
 );
 
--- Table: h_user
-CREATE TABLE h_user (
-                        id_h_user int NOT NULL AUTO_INCREMENT,
-                        id_user int NOT NULL,
-                        password varchar(50) NOT NULL,
-                        email varchar(100) NOT NULL,
-                        status tinyint NOT NULL,
-                        tx_date datetime NOT NULL,
-                        tx_id_user int NOT NULL,
-                        tx_host varchar(100) NOT NULL,
-                        tx_update datetime NOT NULL,
-                        CONSTRAINT h_user_pk PRIMARY KEY (id_h_user)
-);
 
 -- Table: object
 CREATE TABLE object (
@@ -282,45 +262,12 @@ CREATE TABLE object (
                         CONSTRAINT object_pk PRIMARY KEY (id_object)
 );
 
--- Table: person
-CREATE TABLE person (
-                        id_person int NOT NULL AUTO_INCREMENT,
-                        first_name varchar(100) NOT NULL,
-                        last_name varchar(100) NOT NULL,
-                        phone_number varchar(50) NOT NULL,
-                        status tinyint NOT NULL,
-                        tx_date datetime NOT NULL,
-                        tx_id_user int NOT NULL,
-                        tx_host varchar(100) NOT NULL,
-                        tx_update datetime NOT NULL,
-                        CONSTRAINT person_pk PRIMARY KEY (id_person)
-);
-
--- Table: user
-CREATE TABLE user (
-                      id_user int NOT NULL AUTO_INCREMENT,
-                      password varchar(50) NOT NULL,
-                      email varchar(100) NOT NULL,
-                      status tinyint NOT NULL,
-                      tx_date datetime NOT NULL,
-                      tx_id_user int NOT NULL,
-                      tx_host varchar(100) NOT NULL,
-                      tx_update datetime NOT NULL,
-                      CONSTRAINT user_pk PRIMARY KEY (id_user)
-);
-
 -- foreign keys
 -- Reference: collection_collector (table: collection)
 ALTER TABLE collection ADD CONSTRAINT collection_collector FOREIGN KEY collection_collector (id_collector)
     REFERENCES collector (id_collector);
 
--- Reference: collector_person (table: collector)
-ALTER TABLE collector ADD CONSTRAINT collector_person FOREIGN KEY collector_person (id_person)
-    REFERENCES person (id_person);
 
--- Reference: collector_user (table: collector)
-ALTER TABLE collector ADD CONSTRAINT collector_user FOREIGN KEY collector_user (id_user)
-    REFERENCES user (id_user);
 
 -- Reference: h_collection_collection (table: h_collection)
 ALTER TABLE h_collection ADD CONSTRAINT h_collection_collection FOREIGN KEY h_collection_collection (id_collection)
