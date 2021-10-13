@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -47,6 +48,9 @@ public class CollectionService {
     public void deleteCollection(Integer idCollection, Transaction transaction){
         int status = 0 ;
         collectionsRepository.updateStatus(status, transaction.getTxHost(),transaction.getTxUpdate(), idCollection);
+    }
+    public List<CollectionsModel> getCollections(Integer idCollector){
+        return collectionsRepository.findByCollectorId(idCollector);
     }
 
 }

@@ -45,7 +45,6 @@ CREATE TABLE `collector` (
 
 LOCK TABLES `collector` WRITE;
 /*!40000 ALTER TABLE `collector` DISABLE KEYS */;
-INSERT INTO `collector` VALUES (1,2,19,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `collector` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +58,7 @@ DROP TABLE IF EXISTS `h_user`;
 CREATE TABLE `h_user` (
   `id_h_user` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `tx_date` datetime NOT NULL,
@@ -107,7 +106,6 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (2,'Alvin','Poma Tarqui','77765282',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +135,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'$2a$10$1YnwSip5Az2MweCq3Kup3O6I0r7YF.SceIucvLEUJxx/q5etNhTQq','pomaalvin@gmail.com',1,'2021-09-19 21:52:43',1,'172.0.0.1','2021-09-19 21:52:58'),(4,'$2a$10$PDZRo5OoO33XT54qhqgoyueOntYfiRq5hyI4kM8l9gOg3591XEHFS','poma.tarqui.alvin@gmail.com',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00'),(19,'$2a$10$PlPLFjHBZbpef5xUwyOoROQWIHrruEfRt8SnStOHWLOAZXe.VZJGC','poma.alvin.jamil@gmail.com',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,7 +155,7 @@ CREATE TABLE category (
                           CONSTRAINT category_pk PRIMARY KEY (id_category)
 );
 
-INSERT INTO category VALUES (1,"monedas"),(2,"figuras de accion");
+
 
 -- Table: collection
 
@@ -217,7 +214,6 @@ CREATE TABLE h_object (
                           id_h_object int NOT NULL AUTO_INCREMENT,
                           id_object int NOT NULL,
                           id_collection int NOT NULL,
-                          id_category int NOT NULL,
                           name varchar(100) NOT NULL,
                           description varchar(255) NOT NULL,
                           image varchar(255) NOT NULL,
@@ -243,7 +239,6 @@ CREATE TABLE h_person (
                           tx_id_user int NOT NULL,
                           tx_host varchar(100) NOT NULL,
                           tx_update datetime NOT NULL,
-                          person_id_person int NOT NULL,
                           CONSTRAINT h_person_pk PRIMARY KEY (id_h_person)
 );
 
@@ -252,7 +247,6 @@ CREATE TABLE h_person (
 CREATE TABLE object (
                         id_object int NOT NULL AUTO_INCREMENT,
                         id_collection int NOT NULL,
-                        id_category int NOT NULL,
                         name varchar(100) NOT NULL,
                         description varchar(255) NOT NULL,
                         image varchar(255) NOT NULL,
@@ -286,7 +280,7 @@ ALTER TABLE h_object ADD CONSTRAINT h_object_object FOREIGN KEY h_object_object 
     REFERENCES object (id_object);
 
 -- Reference: h_person_person (table: h_person)
-ALTER TABLE h_person ADD CONSTRAINT h_person_person FOREIGN KEY h_person_person (person_id_person)
+ALTER TABLE h_person ADD CONSTRAINT h_person_person FOREIGN KEY h_person_person (id_person)
     REFERENCES person (id_person);
 
 -- Reference: h_user_user (table: h_user)
@@ -301,5 +295,4 @@ ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection
 ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
     REFERENCES collection (id_collection);
 
--- End of file.
 
