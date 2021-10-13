@@ -3,7 +3,7 @@
 -- Host: 127.0.0.1    Database: db_recollar
 -- ------------------------------------------------------
 -- Server version	5.7.31
-drop database db_recollar;
+drop database if exists db_recollar  ;
 create database db_recollar;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

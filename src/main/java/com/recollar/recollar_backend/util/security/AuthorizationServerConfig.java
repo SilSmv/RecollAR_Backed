@@ -62,8 +62,7 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
                 .secret(passwordEncoder.encode("recollar12345"))
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(7200)
-                .refreshTokenValiditySeconds(86400);
+                .accessTokenValiditySeconds(0);
     }
 
     @Override
@@ -76,7 +75,7 @@ public class AuthorizationServerConfig  extends AuthorizationServerConfigurerAda
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(tokenEnhancerChain)
-                .userDetailsService(userService);;
+                .userDetailsService(userService);
     }
 
     @Bean
