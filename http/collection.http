@@ -26,7 +26,7 @@ Content-Type: application/json
 "idCategory": 1
 }
 ###
-DELETE http://localhost:8080/collection/1
+DELETE http://localhost:8080/collection/3
 Accept: application/json
 Content-Type: application/json
 ###

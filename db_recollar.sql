@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS `h_user`;
 CREATE TABLE `h_user` (
   `id_h_user` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `email` varchar(100) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `tx_date` datetime NOT NULL,
@@ -242,7 +242,6 @@ CREATE TABLE h_person (
                           tx_id_user int NOT NULL,
                           tx_host varchar(100) NOT NULL,
                           tx_update datetime NOT NULL,
-                          person_id_person int NOT NULL,
                           CONSTRAINT h_person_pk PRIMARY KEY (id_h_person)
 );
 
@@ -284,7 +283,7 @@ ALTER TABLE h_object ADD CONSTRAINT h_object_object FOREIGN KEY h_object_object 
     REFERENCES object (id_object);
 
 -- Reference: h_person_person (table: h_person)
-ALTER TABLE h_person ADD CONSTRAINT h_person_person FOREIGN KEY h_person_person (person_id_person)
+ALTER TABLE h_person ADD CONSTRAINT h_person_person FOREIGN KEY h_person_person (id_person)
     REFERENCES person (id_person);
 
 -- Reference: h_user_user (table: h_user)
@@ -299,6 +298,12 @@ ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection
 ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
     REFERENCES collection (id_collection);
 
-select * from collection;
--- End of file.
+select * from h_collection;
 
+INSERT INTO `person` VALUES ( 4,'Silvana Munoz', 'Munoz', '7523698', '1', '2021-10-13 02:32:27.000000', '2', '192.168.10.3', '2021-10-13 02:32:27.000000');
+-- End of file.
+INSERT INTO `collector` VALUES (1,2,19,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
+
+INSERT INTO `user` VALUES (2,'$2a$10$1YnwSip5Az2MweCq3Kup3O6I0r7YF.SceIucvLEUJxx/q5etNhTQq','sil@gmail.com',1,'2021-09-19 21:52:43',2,'172.0.0.1','2021-09-19 21:52:58');
+
+INSERT INTO `collector` VALUES (2,2,2,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
