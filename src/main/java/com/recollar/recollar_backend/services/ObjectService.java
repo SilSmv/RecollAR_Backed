@@ -81,4 +81,8 @@ public class ObjectService {
         collectionsRepository.updateAmount(transaction.getTxHost(),transaction.getTxUpdate(), newAmount,idCollection);
     }
 
+    public List<ObjectModel> getObjectsCollection(Integer idCollection){
+        return objectRepository.findByCollectionId(idCollection);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.recollar.recollar_backend.controllers;
 import com.recollar.recollar_backend.dto.CollectionRequest;
 import com.recollar.recollar_backend.dto.ObjectRequest;
 import com.recollar.recollar_backend.models.CollectionsModel;
+import com.recollar.recollar_backend.models.ObjectModel;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.ObjectService;
 import com.recollar.recollar_backend.util.user.TransactionUtil;
@@ -32,6 +33,10 @@ public class ObjectController {
     public void delete(@PathVariable int idObject, HttpServletRequest request) throws Exception {
         Transaction transaction= TransactionUtil.createTransaction(request);
         objectService.deleteObject(idObject,transaction);
+    }
+    @GetMapping("/collection/{idCollection}")
+    public List<ObjectModel> get(@PathVariable int idCollection) throws Exception {
+        return objectService.getObjectsCollection(idCollection);
     }
 
 
