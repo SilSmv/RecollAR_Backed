@@ -17,11 +17,11 @@ Accept: application/json
 Content-Type: application/json
 
 {
-"idCollection": 3,
+"idCollection": 1,
 "idCollector": 1,
 "name": "Moneda USA-2010",
 "color": "silver",
-"amount": 2,
+"amount": 0,
 "status": 1,
 "idCategory": 1
 }

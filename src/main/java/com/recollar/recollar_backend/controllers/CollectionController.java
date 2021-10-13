@@ -1,11 +1,9 @@
 package com.recollar.recollar_backend.controllers;
 
 import com.recollar.recollar_backend.dto.CollectionRequest;
-import com.recollar.recollar_backend.dto.UserRequest;
 import com.recollar.recollar_backend.models.CollectionsModel;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.CollectionService;
-import com.recollar.recollar_backend.services.UserService;
 import com.recollar.recollar_backend.util.user.TransactionUtil;
 import org.springframework.web.bind.annotation.*;
 

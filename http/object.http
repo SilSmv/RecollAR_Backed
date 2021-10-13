@@ -1,0 +1,39 @@
+POST http://localhost:8080/object
+Accept: application/json
+Content-Type: application/json
+
+{
+  "idObject":1,
+  "idCollection": 1,
+  "name": "Monedas de $0.25",
+  "description": "Moneda medio abollada",
+  "image": "imagen.com",
+  "objectStatus": 1,
+  "price": 50
+}
+
+
+###
+
+PUT http://localhost:8080/object
+Accept: application/json
+Content-Type: application/json
+
+{
+  "idObject":1,
+  "idCollection": 1,
+  "name": "Monedas de $0.25",
+  "description": "Moneda medio abollada",
+  "image": "imagen.com",
+  "objectStatus": 1,
+  "price": 50
+}
+###
+DELETE http://localhost:8080/collection/3
+Accept: application/json
+Content-Type: application/json
+###
+GET http://localhost:8080/collection/1
+Accept: application/json
+Content-Type: application/json
+

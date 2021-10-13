@@ -17,9 +17,11 @@ public class CollectionService {
     @Resource
     private CollectionsRepository collectionsRepository;
 
+    private int status = 0;
+
     public void createCollection(CollectionRequest collectionRequest, Transaction transaction){
         CollectionsModel collectionModel = new CollectionsModel();
-        int status = 1 ;
+        status = 1 ;
         collectionModel.setIdCollector(collectionRequest.getIdCollector());
         collectionModel.setName(collectionRequest.getName());
         collectionModel.setColor(collectionRequest.getColor());
@@ -31,7 +33,7 @@ public class CollectionService {
     }
 
     public void updateCollection(CollectionRequest collectionRequest, Transaction transaction){
-        int status = 1 ;
+        status = 1 ;
         CollectionsModel collectionModel = new CollectionsModel();
         collectionModel.setIdCollection(collectionRequest.getIdCollection());
         collectionModel.setIdCollector(collectionRequest.getIdCollector());
@@ -46,7 +48,7 @@ public class CollectionService {
         System.out.println();
     }
     public void deleteCollection(Integer idCollection, Transaction transaction){
-        int status = 0 ;
+        status = 0 ;
         collectionsRepository.updateStatus(status, transaction.getTxHost(),transaction.getTxUpdate(), idCollection);
     }
     public List<CollectionsModel> getCollections(Integer idCollector){

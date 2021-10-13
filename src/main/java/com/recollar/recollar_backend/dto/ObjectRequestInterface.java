@@ -6,4 +6,16 @@ public interface ObjectRequestInterface {
     public String getName();
 
     public String getImage();
+
+
+    public int getIdCollection();
+
+
+    public String getDescription();
+
+    public int getObjectStatus();
+
+
+    public float getPrice();
+
 }
