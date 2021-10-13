@@ -29,7 +29,7 @@ Content-Type: application/json
   "price": 50
 }
 ###
-DELETE http://localhost:8080/collection/3
+DELETE http://localhost:8080/object/2
 Accept: application/json
 Content-Type: application/json
 ###

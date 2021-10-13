@@ -28,6 +28,11 @@ public class ObjectController {
         Transaction transaction= TransactionUtil.createTransaction(request);
         objectService.updateObject(objectRequest,transaction);
     }
+    @DeleteMapping("/{idObject}")
+    public void delete(@PathVariable int idObject, HttpServletRequest request) throws Exception {
+        Transaction transaction= TransactionUtil.createTransaction(request);
+        objectService.deleteObject(idObject,transaction);
+    }
 
 
 }

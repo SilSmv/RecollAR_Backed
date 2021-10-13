@@ -62,5 +62,23 @@ public class ObjectService {
         objectModel.setTransaction(transaction);
         objectRepository.save(objectModel);
     }
+    public void deleteObject(Integer idObject, Transaction transaction){
+        int idCollection = 0;
+        int newAmount = 0;
+        status = 0 ;
+        objectRepository.updateStatus(status, transaction.getTxHost(),transaction.getTxUpdate(), idObject);
+        Optional<ObjectModel> objectModel = objectRepository.findById(idObject);
+        if(objectModel.isPresent()){
+            ObjectModel objectModelAux = objectModel.get();
+            idCollection = objectModelAux.getIdCollection();
+            Optional<CollectionsModel> collectionsModel = collectionsRepository.findById(idCollection);
+            if(collectionsModel.isPresent()){
+                CollectionsModel auxcollectionsModel=collectionsModel.get();
+                newAmount = auxcollectionsModel.getAmount()-1;
+            }
+
+        }
+        collectionsRepository.updateAmount(transaction.getTxHost(),transaction.getTxUpdate(), newAmount,idCollection);
+    }
 
 }
