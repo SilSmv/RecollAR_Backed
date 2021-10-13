@@ -45,7 +45,6 @@ CREATE TABLE `collector` (
 
 LOCK TABLES `collector` WRITE;
 /*!40000 ALTER TABLE `collector` DISABLE KEYS */;
-INSERT INTO `collector` VALUES (1,2,19,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `collector` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +106,6 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (2,'Alvin','Poma Tarqui','77765282',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +135,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'$2a$10$1YnwSip5Az2MweCq3Kup3O6I0r7YF.SceIucvLEUJxx/q5etNhTQq','pomaalvin@gmail.com',1,'2021-09-19 21:52:43',1,'172.0.0.1','2021-09-19 21:52:58'),(4,'$2a$10$PDZRo5OoO33XT54qhqgoyueOntYfiRq5hyI4kM8l9gOg3591XEHFS','poma.tarqui.alvin@gmail.com',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00'),(19,'$2a$10$PlPLFjHBZbpef5xUwyOoROQWIHrruEfRt8SnStOHWLOAZXe.VZJGC','poma.alvin.jamil@gmail.com',1,'2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -158,7 +155,7 @@ CREATE TABLE category (
                           CONSTRAINT category_pk PRIMARY KEY (id_category)
 );
 
-INSERT INTO category VALUES (1,"monedas"),(2,"figuras de accion");
+
 
 -- Table: collection
 
@@ -298,12 +295,4 @@ ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection
 ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
     REFERENCES collection (id_collection);
 
-select * from h_collection;
 
-INSERT INTO `person` VALUES ( 4,'Silvana Munoz', 'Munoz', '7523698', '1', '2021-10-13 02:32:27.000000', '2', '192.168.10.3', '2021-10-13 02:32:27.000000');
--- End of file.
-INSERT INTO `collector` VALUES (1,2,19,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
-
-INSERT INTO `user` VALUES (2,'$2a$10$1YnwSip5Az2MweCq3Kup3O6I0r7YF.SceIucvLEUJxx/q5etNhTQq','sil@gmail.com',1,'2021-09-19 21:52:43',2,'172.0.0.1','2021-09-19 21:52:58');
-
-INSERT INTO `collector` VALUES (2,2,2,1,'','2021-09-23 00:00:00',1,'192.168.0.3','2021-09-23 00:00:00');
