@@ -22,7 +22,7 @@ Content-Type: application/json
 {
   "idObject":1,
   "idCollection": 1,
-  "name": "Monedas de $0.25",
+  "name": "Monedas de $0.5",
   "description": "Moneda medio abollada",
   "image": "imagen.com",
   "objectStatus": 1,

@@ -16,12 +16,11 @@ public class CollectionService {
 
     @Resource
     private CollectionsRepository collectionsRepository;
-
-    private int status = 0;
+    int status = 0;
 
     public void createCollection(CollectionRequest collectionRequest, Transaction transaction){
         CollectionsModel collectionModel = new CollectionsModel();
-        status = 1 ;
+        int status = 1 ;
         collectionModel.setIdCollector(collectionRequest.getIdCollector());
         collectionModel.setName(collectionRequest.getName());
         collectionModel.setColor(collectionRequest.getColor());
@@ -45,7 +44,6 @@ public class CollectionService {
         collectionModel.setTransaction(transaction);
 
         collectionsRepository.save(collectionModel);
-        System.out.println();
     }
     public void deleteCollection(Integer idCollection, Transaction transaction){
         status = 0 ;

@@ -1,5 +1,6 @@
 package com.recollar.recollar_backend.services;
 
+import com.recollar.recollar_backend.dto.CollectionRequest;
 import com.recollar.recollar_backend.dto.ObjectRequest;
 import com.recollar.recollar_backend.models.CollectionsModel;
 import com.recollar.recollar_backend.models.ObjectModel;
@@ -27,7 +28,7 @@ public class ObjectService {
     public void createObject(ObjectRequest objectRequest, Transaction transaction){
         int newAmount = 0;
         status = 1;
-        System.out.println("Entre");
+
         ObjectModel objectModel = new ObjectModel();
         objectModel.setIdCollection(objectRequest.getIdCollection());
         objectModel.setName(objectRequest.getName());
@@ -38,7 +39,7 @@ public class ObjectService {
         objectModel.setPrice(objectRequest.getPrice());
         objectModel.setTransaction(transaction);
         objectRepository.save(objectModel);
-        System.out.println("Ya agregue");
+
         int  idCollection = objectModel.getIdCollection();
         Optional<CollectionsModel> collectionsModel = collectionsRepository.findById(idCollection);
         if(collectionsModel.isPresent()){
@@ -46,6 +47,20 @@ public class ObjectService {
             newAmount = auxcollectionsModel.getAmount()+1;
         }
         collectionsRepository.updateAmount(transaction.getTxHost(),transaction.getTxUpdate(), newAmount,idCollection);
+    }
+    public void updateObject(ObjectRequest objectRequest, Transaction transaction){
+        status = 1 ;
+        ObjectModel objectModel = new ObjectModel();
+        objectModel.setIdObject(objectRequest.getIdObject());
+        objectModel.setIdCollection(objectRequest.getIdCollection());
+        objectModel.setName(objectRequest.getName());
+        objectModel.setDescription(objectRequest.getDescription());
+        objectModel.setImage(objectRequest.getImage());
+        objectModel.setStatus(status);
+        objectModel.setObjectStatus(objectRequest.getObjectStatus());
+        objectModel.setPrice(objectRequest.getPrice());
+        objectModel.setTransaction(transaction);
+        objectRepository.save(objectModel);
     }
 
 }
