@@ -8,9 +8,10 @@ import java.util.Collection;
 public class UserInformationModel extends User {
     private Integer idUser;
     private Integer idCollector;
+    private Integer idPerson;
     private String email;
 
-    public UserInformationModel(String username,Integer idUser,Integer idCollector, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserInformationModel(String username,Integer idUser,Integer idCollector,String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.idCollector=idCollector;
         this.idUser=idUser;
@@ -40,6 +41,14 @@ public class UserInformationModel extends User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getIdPerson() {
+        return idPerson;
+    }
+
+    public void setIdPerson(Integer idPerson) {
+        this.idPerson = idPerson;
     }
 
     @Override

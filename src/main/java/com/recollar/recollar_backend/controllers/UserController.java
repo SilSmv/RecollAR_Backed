@@ -1,5 +1,6 @@
 package com.recollar.recollar_backend.controllers;
 
+import com.recollar.recollar_backend.dto.SimpleUserRequest;
 import com.recollar.recollar_backend.dto.UserRequest;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.UserService;
@@ -27,5 +28,10 @@ public class UserController {
     @GetMapping
     public UserRequest getProfile(){
         return userService.getProfile();
+    }
+
+    @PutMapping
+    public void updateProfile(@RequestBody SimpleUserRequest simpleUserRequest){
+        userService.updateProfile(simpleUserRequest);
     }
 }

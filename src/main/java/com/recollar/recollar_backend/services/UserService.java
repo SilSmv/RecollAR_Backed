@@ -1,4 +1,5 @@
 package com.recollar.recollar_backend.services;
+import com.recollar.recollar_backend.dto.SimpleUserRequest;
 import com.recollar.recollar_backend.dto.UserRequest;
 import com.recollar.recollar_backend.dto.UserRequestInterface;
 import com.recollar.recollar_backend.models.*;
@@ -43,6 +44,7 @@ public class UserService  implements UserDetailsService {
             userInformationModel.setEmail(user.getEmail());
             userInformationModel.setIdCollector(collectorModel.getIdCollector());
             userInformationModel.setIdUser(user.getIdUser());
+            userInformationModel.setIdPerson(collectorModel.getIdPerson());
             return userInformationModel;
         } else {
             throw new UsernameNotFoundException("User '"+email+"' not found!");
@@ -82,6 +84,11 @@ public class UserService  implements UserDetailsService {
         UserRequestInterface get=userRepository.getUserByIdCollector(userInformationModel.getIdCollector());
         UserRequest user=new UserRequest(get);
         return  user;
+    }
+
+    public void updateProfile(SimpleUserRequest simpleUserRequest){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+        userRepository.updateProfile(simpleUserRequest,userInformationModel.getIdPerson());
     }
 
 }
