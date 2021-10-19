@@ -11,7 +11,6 @@ public class CollectionsModel {
     @Column(name = "id_collector")
     private int idCollector;
     private String name;
-    private String color;
     private int amount;
     private String image;
     private int status;
@@ -66,13 +65,6 @@ public class CollectionsModel {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
 
     public int getAmount() {
         return amount;

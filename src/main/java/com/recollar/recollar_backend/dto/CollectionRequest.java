@@ -2,28 +2,8 @@ package com.recollar.recollar_backend.dto;
 
 public class CollectionRequest {
     private int idCollection;
-    private int idCollector;
     private String name;
-    private String color;
-    private int amount;
-    private int status;
     private int idCategory;
-
-    public int getIdCategory() {
-        return idCategory;
-    }
-
-    public void setIdCategory(int idCategory) {
-        this.idCategory = idCategory;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
 
     public int getIdCollection() {
         return idCollection;
@@ -31,14 +11,6 @@ public class CollectionRequest {
 
     public void setIdCollection(int idCollection) {
         this.idCollection = idCollection;
-    }
-
-    public int getIdCollector() {
-        return idCollector;
-    }
-
-    public void setIdCollector(int idCollector) {
-        this.idCollector = idCollector;
     }
 
     public String getName() {
@@ -49,19 +21,11 @@ public class CollectionRequest {
         this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    public int getIdCategory() {
+        return idCategory;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 }

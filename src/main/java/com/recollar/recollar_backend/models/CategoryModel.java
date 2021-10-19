@@ -9,15 +9,15 @@ import javax.persistence.Id;
 public class CategoryModel {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id_category;
+    private int idCategory;
     private String name;
 
-    public int getId_category() {
-        return id_category;
+    public int getIdCategory() {
+        return idCategory;
     }
 
-    public void setId_category(int id_category) {
-        this.id_category = id_category;
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getName() {

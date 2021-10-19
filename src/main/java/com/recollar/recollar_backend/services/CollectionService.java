@@ -23,11 +23,11 @@ public class CollectionService {
 
     public void createCollection(CollectionRequest collectionRequest, Transaction transaction){
         CollectionsModel collectionModel = new CollectionsModel();
+        UserInformationModel userInformationModel= UserUtil.getUser();
         int status = 1 ;
-        collectionModel.setIdCollector(collectionRequest.getIdCollector());
+        collectionModel.setIdCollector(userInformationModel.getIdCollector());
         collectionModel.setName(collectionRequest.getName());
-        collectionModel.setColor(collectionRequest.getColor());
-        collectionModel.setAmount(collectionRequest.getAmount());
+        collectionModel.setAmount(0);
         collectionModel.setStatus(status);
         collectionModel.setIdCategory(collectionRequest.getIdCategory());
         collectionModel.setTransaction(transaction);
@@ -35,13 +35,14 @@ public class CollectionService {
     }
 
     public void updateCollection(CollectionRequest collectionRequest, Transaction transaction){
+
+        UserInformationModel userInformationModel= UserUtil.getUser();
         status = 1 ;
         CollectionsModel collectionModel = new CollectionsModel();
         collectionModel.setIdCollection(collectionRequest.getIdCollection());
-        collectionModel.setIdCollector(collectionRequest.getIdCollector());
+        collectionModel.setIdCollector(userInformationModel.getIdCollector());
         collectionModel.setName(collectionRequest.getName());
-        collectionModel.setColor(collectionRequest.getColor());
-        collectionModel.setAmount(collectionRequest.getAmount());
+        collectionModel.setAmount(0);
         collectionModel.setStatus(status);
         collectionModel.setIdCategory(collectionRequest.getIdCategory());
         collectionModel.setTransaction(transaction);
