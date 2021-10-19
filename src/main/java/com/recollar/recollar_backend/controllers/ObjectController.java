@@ -38,6 +38,10 @@ public class ObjectController {
     public List<ObjectModel> get(@PathVariable int idCollection) throws Exception {
         return objectService.getObjectsCollection(idCollection);
     }
+    @GetMapping("/available")
+    public List<ObjectModel> getObjectAvailable() throws Exception {
+        return objectService.getObjectsAvailable();
+    }
 
 
 }

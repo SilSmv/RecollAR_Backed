@@ -9,16 +9,6 @@ public class ObjectRequest {
     private int objectStatus;
     private float price;
 
-    /*public ObjectRequest(ObjectRequestInterface objectRequestInterface){
-        this.idObject=objectRequestInterface.getIdObject();
-        this.name=objectRequestInterface.getName();
-        this.image=objectRequestInterface.getImage();
-        this.idCollection = objectRequestInterface.getIdCollection();
-        this.description = objectRequestInterface.getDescription();
-        this.objectStatus = objectRequestInterface.getObjectStatus();
-        this.price = objectRequestInterface.getPrice();
-    }*/
-
     public Integer getIdObject() {
         return idObject;
     }

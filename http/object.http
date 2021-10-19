@@ -25,7 +25,7 @@ Content-Type: application/json
   "name": "Monedas de $0.5",
   "description": "Moneda medio abollada",
   "image": "imagen.com",
-  "objectStatus": 1,
+  "objectStatus": 2,
   "price": 50
 }
 ###
@@ -35,6 +35,18 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/object/collection/1
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/object/available
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/category
 Accept: application/json
 Content-Type: application/json
 

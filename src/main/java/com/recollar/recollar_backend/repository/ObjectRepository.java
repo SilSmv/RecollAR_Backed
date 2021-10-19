@@ -21,7 +21,7 @@ public interface ObjectRepository extends JpaRepository<ObjectModel,Integer> {
     @Query(value = "select * from object c where c.id_collection = ?1 and c.status=1 order by c.id_collection DESC", nativeQuery = true)
     List<ObjectModel> findByCollectionId(Integer idCollector);
 
-    @Query(value = "select * from object c where c.object_status = ?2 or c.object_status = ?3 order by c.id_collection DESC", nativeQuery = true)
-    List<ObjectModel> getSaleExchange();
+    @Query(value = "select * from object c where c.status = 1 and c.object_status = 2 or c.object_status = 3 order by c.id_collection DESC", nativeQuery = true)
+    List<ObjectModel> getObjectAvailable();
 
 }
