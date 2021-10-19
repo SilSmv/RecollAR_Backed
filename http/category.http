@@ -1,0 +1,6 @@
+###
+
+GET http://localhost:8080/category
+Accept: application/json
+Content-Type: application/json
+###

@@ -44,9 +44,5 @@ GET http://localhost:8080/object/available
 Accept: application/json
 Content-Type: application/json
 
-###
 
-GET http://localhost:8080/category
-Accept: application/json
-Content-Type: application/json
 
