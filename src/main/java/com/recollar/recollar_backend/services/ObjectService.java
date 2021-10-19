@@ -84,5 +84,8 @@ public class ObjectService {
     public List<ObjectModel> getObjectsCollection(Integer idCollection){
         return objectRepository.findByCollectionId(idCollection);
     }
+    public List<ObjectModel> getObjectsAvailable(){
+        return objectRepository.getObjectAvailable();
+    }
 
 }

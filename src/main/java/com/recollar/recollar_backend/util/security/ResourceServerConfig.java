@@ -40,6 +40,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/object/{idObject}").permitAll()
                 .antMatchers(HttpMethod.GET, "/object/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/object/collection/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/category").permitAll()
+                .antMatchers(HttpMethod.GET, "/object/available").permitAll()
                 .anyRequest (). authenticated ()
                 .and().cors().configurationSource(corsConfigurationSource());
 
