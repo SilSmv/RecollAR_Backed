@@ -13,6 +13,7 @@ public class CollectionsModel {
     private String name;
     private String color;
     private int amount;
+    private String image;
     private int status;
     @Column(name = "id_category")
     private int idCategory;
@@ -80,6 +81,15 @@ public class CollectionsModel {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public void setTransaction(Transaction transaction){
         this.txDate=transaction.getTxDate();
         this.txHost=transaction.getTxHost();

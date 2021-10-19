@@ -35,8 +35,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/collection").permitAll()
                 .antMatchers(HttpMethod.PUT, "/collection").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/collection/{idCollection}").permitAll()
-                .antMatchers(HttpMethod.GET, "/collection/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/object").permitAll()
                 .antMatchers(HttpMethod.PUT, "/object").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/object/{idObject}").permitAll()

@@ -5,10 +5,13 @@ import com.recollar.recollar_backend.models.CollectionsModel;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.CollectionService;
 import com.recollar.recollar_backend.util.user.TransactionUtil;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -36,9 +39,14 @@ public class CollectionController {
         collectionService.deleteCollection(idCollection,transaction);
     }
 
-    @GetMapping("/{idCollector}")
-    public List<CollectionsModel> get(@PathVariable int idCollector) throws Exception {
-        return collectionService.getCollections(idCollector);
+    @GetMapping
+    public List<CollectionsModel> get() {
+        return collectionService.getCollections();
+    }
+    @RequestMapping(path="/image",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadImage(@RequestParam MultipartFile images, HttpServletRequest request, @RequestParam Integer idCollection){
+        Transaction transaction= TransactionUtil.createTransaction(request);
+        collectionService.uploadImage(images,idCollection,transaction);
     }
 
 }

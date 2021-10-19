@@ -3,7 +3,10 @@ package com.recollar.recollar_backend.services;
 import com.recollar.recollar_backend.dto.CollectionRequest;
 import com.recollar.recollar_backend.models.*;
 import com.recollar.recollar_backend.repository.CollectionsRepository;
+import com.recollar.recollar_backend.util.storage.StorageUtil;
+import com.recollar.recollar_backend.util.user.UserUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -49,8 +52,17 @@ public class CollectionService {
         status = 0 ;
         collectionsRepository.updateStatus(status, transaction.getTxHost(),transaction.getTxUpdate(), idCollection);
     }
-    public List<CollectionsModel> getCollections(Integer idCollector){
-        return collectionsRepository.findByCollectorId(idCollector);
+    public List<CollectionsModel> getCollections(){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+        return collectionsRepository.findByCollectorId(userInformationModel.getIdCollector());
+    }
+    public void uploadImage(MultipartFile image, Integer idCollection, Transaction transaction){
+        StorageUtil storageUtil= new StorageUtil();
+        String name=storageUtil.upload(image,"imageSeller");
+        collectionsRepository.updateImage(transaction.getTxHost(),transaction.getTxUpdate(),name,idCollection);
+
+
+
     }
 
 }

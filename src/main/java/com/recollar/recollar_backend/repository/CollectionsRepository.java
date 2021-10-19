@@ -23,4 +23,10 @@ public interface CollectionsRepository extends JpaRepository<CollectionsModel,In
 
     @Query(value = "select * from collection c where c.id_collector = ?1 and c.status=1", nativeQuery = true)
     List<CollectionsModel> findByCollectorId(Integer idCollector);
+
+    @Modifying
+    @Transactional
+    @Query("update collection h SET h.txHost = ?1, h.txUpdate = ?2, h.image = ?3 WHERE h.idCollection = ?4 and h.status = 1")
+    public void updateImage( String txHost, Date txUpdate, String image,Integer idCollection);
+
 }
