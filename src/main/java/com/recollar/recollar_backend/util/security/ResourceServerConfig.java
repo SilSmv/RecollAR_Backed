@@ -44,6 +44,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/object/collection/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/category").permitAll()
                 .antMatchers(HttpMethod.GET, "/object/available").permitAll()
+                .antMatchers(HttpMethod.GET, "/object/search/*").permitAll()
                 .anyRequest (). authenticated ()
                 .and().cors().configurationSource(corsConfigurationSource());
 
