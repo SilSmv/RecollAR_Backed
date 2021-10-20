@@ -297,4 +297,5 @@ ALTER TABLE collection ADD CONSTRAINT collection_category FOREIGN KEY collection
 ALTER TABLE object ADD CONSTRAINT object_collection FOREIGN KEY object_collection (id_collection)
     REFERENCES collection (id_collection);
 
+ALTER TABLE object ADD FULLTEXT(name, description);
 

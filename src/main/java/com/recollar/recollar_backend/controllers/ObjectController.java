@@ -42,6 +42,10 @@ public class ObjectController {
     public List<ObjectModel> getObjectAvailable() throws Exception {
         return objectService.getObjectsAvailable();
     }
+    @GetMapping("/search/{text}")
+    public List<ObjectModel> searchObject(@PathVariable String text) throws Exception {
+        return objectService.searchObjects(text);
+    }
 
 
 }

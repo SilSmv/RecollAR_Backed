@@ -87,5 +87,9 @@ public class ObjectService {
     public List<ObjectModel> getObjectsAvailable(){
         return objectRepository.getObjectAvailable();
     }
+    public List<ObjectModel> searchObjects(String search){
+        System.out.println(search);
 
+        return objectRepository.getObjectSearch(search);
+    }
 }
