@@ -21,7 +21,7 @@ public class CollectionService {
     private CollectionsRepository collectionsRepository;
     int status = 0;
 
-    public void createCollection(CollectionRequest collectionRequest, Transaction transaction){
+    public CollectionsModel createCollection(CollectionRequest collectionRequest, Transaction transaction){
         CollectionsModel collectionModel = new CollectionsModel();
         UserInformationModel userInformationModel= UserUtil.getUser();
         int status = 1 ;
@@ -32,6 +32,7 @@ public class CollectionService {
         collectionModel.setIdCategory(collectionRequest.getIdCategory());
         collectionModel.setTransaction(transaction);
         collectionsRepository.save(collectionModel);
+        return collectionModel;
     }
 
     public void updateCollection(CollectionRequest collectionRequest, Transaction transaction){
@@ -59,7 +60,7 @@ public class CollectionService {
     }
     public void uploadImage(MultipartFile image, Integer idCollection, Transaction transaction){
         StorageUtil storageUtil= new StorageUtil();
-        String name=storageUtil.upload(image,"imageSeller");
+        String name=storageUtil.upload(image,"imageCollection");
         collectionsRepository.updateImage(transaction.getTxHost(),transaction.getTxUpdate(),name,idCollection);
 
 

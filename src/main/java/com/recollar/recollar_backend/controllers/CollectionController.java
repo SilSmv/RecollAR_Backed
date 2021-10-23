@@ -5,6 +5,7 @@ import com.recollar.recollar_backend.models.CollectionsModel;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.CollectionService;
 import com.recollar.recollar_backend.util.user.TransactionUtil;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,9 +23,9 @@ public class CollectionController {
     private CollectionService collectionService;
 
     @PostMapping
-    public void create(@RequestBody CollectionRequest collectionRequest, HttpServletRequest request) throws Exception {
+    public CollectionsModel create(@RequestBody CollectionRequest collectionRequest, HttpServletRequest request) throws Exception {
         Transaction transaction= TransactionUtil.createTransaction(request);
-        collectionService.createCollection(collectionRequest,transaction);
+        return collectionService.createCollection(collectionRequest,transaction);
     }
 
     @PutMapping

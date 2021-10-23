@@ -32,7 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/collection").permitAll()
                 .antMatchers(HttpMethod.PUT, "/collection").permitAll()
                 .antMatchers(HttpMethod.POST, "/object").permitAll()
