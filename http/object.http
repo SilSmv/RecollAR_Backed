@@ -45,7 +45,7 @@ Accept: application/json
 Content-Type: application/json
 
 ###
-GET http://localhost:8080/object/search/media
+GET http://localhost:8080/object/search/Moneda
 Accept: application/json
 Content-Type: application/json
 
