@@ -1,16 +1,19 @@
 package com.recollar.recollar_backend.services;
 
-import com.recollar.recollar_backend.dto.CollectionRequest;
 import com.recollar.recollar_backend.dto.ObjectRequest;
+import com.recollar.recollar_backend.dto.ObjectSimpleRequest;
 import com.recollar.recollar_backend.models.CollectionsModel;
 import com.recollar.recollar_backend.models.ObjectModel;
 import com.recollar.recollar_backend.models.Transaction;
+import com.recollar.recollar_backend.models.UserInformationModel;
 import com.recollar.recollar_backend.repository.CollectionsRepository;
 import com.recollar.recollar_backend.repository.ObjectRepository;
+import com.recollar.recollar_backend.util.user.UserUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,8 +84,19 @@ public class ObjectService {
         collectionsRepository.updateAmount(transaction.getTxHost(),transaction.getTxUpdate(), newAmount,idCollection);
     }
 
-    public List<ObjectModel> getObjectsCollection(Integer idCollection){
-        return objectRepository.findByCollectionId(idCollection);
+    public List<ObjectSimpleRequest> getObjectsCollection(Integer idCollection){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+        List<ObjectSimpleRequest> listObjects= new ArrayList();
+        var listObjectsAux=objectRepository.findByCollectionId(idCollection,userInformationModel.getIdCollector());
+        for(var object:listObjectsAux){
+            listObjects.add(new ObjectSimpleRequest(object));
+        }
+        return  listObjects;
+    }
+    public ObjectModel getObjectById(Integer idObject){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+
+        return objectRepository.getByIdWithVerification(idObject,userInformationModel.getIdCollector());
     }
     public List<ObjectModel> getObjectsAvailable(){
         return objectRepository.getObjectAvailable();

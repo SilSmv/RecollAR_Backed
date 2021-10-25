@@ -34,7 +34,7 @@ Accept: application/json
 Content-Type: application/json
 ###
 
-GET http://localhost:8080/object/collection/1
+GET http://localhost:8080/object?id_collection=1
 Accept: application/json
 Content-Type: application/json
 
@@ -49,5 +49,8 @@ GET http://localhost:8080/object/search/media
 Accept: application/json
 Content-Type: application/json
 
-
+###
+GET http://localhost:8080/object/1
+Accept: application/json
+Content-Type: application/json
 
