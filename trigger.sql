@@ -22,7 +22,7 @@ CREATE TRIGGER tg_insert_h_collection
     AFTER INSERT ON collection
     FOR EACH ROW
 BEGIN
-    INSERT INTO `h_collection`(`id_collection`,`id_collector`,`name`,`color`,`amount`,`id_category`,`status`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_collection,NEW.id_collector,NEW.name,NEW.color,NEW.amount,NEW.id_category,NEW.status,NOW(),NEW.tx_id_user,NEW.tx_host,NOW());
+    INSERT INTO `h_collection`(`id_collection`,`id_collector`,`name`,`amount`,`id_category`,`status`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_collection,NEW.id_collector,NEW.name,NEW.amount,NEW.id_category,NEW.status,NOW(),NEW.tx_id_user,NEW.tx_host,NOW());
 END;
 |
 DELIMITER ;
@@ -32,7 +32,7 @@ CREATE TRIGGER tg_update_h_collection
     AFTER UPDATE ON collection
     FOR EACH ROW
 BEGIN
-    INSERT INTO `h_collection`(`id_collection`,`id_collector`,`name`,`color`,`amount`,`id_category`,`status`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES (NEW.id_collection, NEW.id_collector,NEW.name,NEW.color,NEW.amount,NEW.id_category,NEW.status,OLD.tx_date,NEW.tx_id_user,NEW.tx_host,NOW());
+    INSERT INTO `h_collection`(`id_collection`,`id_collector`,`name`,`amount`,`id_category`,`status`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES (NEW.id_collection, NEW.id_collector,NEW.name,NEW.amount,NEW.id_category,NEW.status,OLD.tx_date,NEW.tx_id_user,NEW.tx_host,NOW());
 END;
 |
 DELIMITER ;
