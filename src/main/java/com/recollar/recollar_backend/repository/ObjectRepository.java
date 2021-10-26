@@ -27,7 +27,7 @@ public interface ObjectRepository extends JpaRepository<ObjectModel,Integer> {
     @Query(value = "select * from object c where c.status = 1 and c.object_status = 2 or c.object_status = 3 order by c.id_collection DESC", nativeQuery = true)
     List<ObjectModel> getObjectAvailable();
 
-    @Query(value = "select * from object c where MATCH(c.name,c.description) AGAINST ( 'searchString' IN BOOLEAN MODE) and c.status = 2 or c.status = 3 order by c.id_object DESC", nativeQuery = true)
+    @Query(value = "select * from object c where MATCH(c.name,c.description) AGAINST ( ?1 IN BOOLEAN MODE) and c.status !=0 order by c.id_object DESC", nativeQuery = true)
     List<ObjectModel> getObjectsSearch(@Param("searchString") String searchString);
 
     @Query(value = "select * from object c where  c.status = 2 or c.status = 3 order by c.id_object DESC", nativeQuery = true)
@@ -37,7 +37,7 @@ public interface ObjectRepository extends JpaRepository<ObjectModel,Integer> {
     ObjectModel getByIdWithVerification(@Param("idObject") Integer idObject,@Param("idCollector") Integer idCollector);
     @Modifying
     @Transactional
-    @Query("update object h SET h.txHost = ?1, h.txUpdate = ?2, h.image = ?3 WHERE h.idObject = ?4 and h.status != 0")
+    @Query("update object h SET h.txHost = ?1, h.txUpdate = ?2, h.image = ?3 WHERE h.idObject = ?4 and h.status !=0")
     public void updateImage( String txHost, Date txUpdate, String image,Integer idObject);
 
     @Modifying

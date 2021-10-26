@@ -101,8 +101,8 @@ public class ObjectService {
         return objectRepository.getObjectAvailable();
     }
     public List<ObjectModel> searchObjects(String search){
-
-        return search!=null?objectRepository.getObjectsSearch(search):objectRepository.getObjects();
+        System.out.println(search);
+        return search!=null?objectRepository.getObjectsSearch("*"+search+"*"):objectRepository.getObjects();
     }
     public void uploadImage(MultipartFile image, Integer idObject, Transaction transaction) {
         StorageUtil storageUtil = new StorageUtil();
