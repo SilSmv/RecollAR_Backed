@@ -1,5 +1,6 @@
 package com.recollar.recollar_backend.services;
 import com.recollar.recollar_backend.dto.SimpleUserRequest;
+import com.recollar.recollar_backend.dto.UserChangeRequest;
 import com.recollar.recollar_backend.dto.UserRequest;
 import com.recollar.recollar_backend.dto.UserRequestInterface;
 import com.recollar.recollar_backend.models.*;
@@ -89,6 +90,25 @@ public class UserService  implements UserDetailsService {
     public void updateProfile(SimpleUserRequest simpleUserRequest){
         UserInformationModel userInformationModel= UserUtil.getUser();
         userRepository.updateProfile(simpleUserRequest,userInformationModel.getIdPerson());
+    }
+
+    public void updatePassword(UserChangeRequest userChangeRequest){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+        System.out.println(userInformationModel);
+
+        UserModel userModel = new UserModel();
+        String email = userInformationModel.getEmail().toString();
+        userModel = userRepository.findByEmail(email);
+        System.out.println(userModel);
+        boolean oldPassEncode=new BCryptPasswordEncoder().matches(userChangeRequest.getOldPassword(),userModel.getPassword());
+        if(oldPassEncode){
+            String newPassEncode=new BCryptPasswordEncoder().encode(userChangeRequest.getNewPassword());
+            userRepository.updatePassword(newPassEncode,userInformationModel.getIdUser());
+        }
+
+
+
+
     }
 
 }
