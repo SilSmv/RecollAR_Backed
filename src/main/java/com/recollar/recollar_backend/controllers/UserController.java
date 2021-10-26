@@ -1,6 +1,7 @@
 package com.recollar.recollar_backend.controllers;
 
 import com.recollar.recollar_backend.dto.SimpleUserRequest;
+import com.recollar.recollar_backend.dto.UserChangeRequest;
 import com.recollar.recollar_backend.dto.UserRequest;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.UserService;
@@ -33,5 +34,9 @@ public class UserController {
     @PutMapping
     public void updateProfile(@RequestBody SimpleUserRequest simpleUserRequest){
         userService.updateProfile(simpleUserRequest);
+    }
+    @PutMapping("/password")
+    public void updatePassword(@RequestBody UserChangeRequest userChangeRequest){
+        userService.updatePassword(userChangeRequest);
     }
 }

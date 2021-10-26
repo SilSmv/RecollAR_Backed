@@ -20,6 +20,21 @@ INSERT INTO `collector` VALUES (1,1,1,1,'','2021-09-23 00:00:00',1,'192.168.0.10
 -- Category
 INSERT INTO category VALUES (1,'monedas'),
                             (2,'figuras de accion');
+INSERT INTO category VALUES (3,'libros'),
+                            (4,'comics'),
+                            (5,'videos'),
+                            (6,'juegos'),
+                            (7,'sellos'),
+                            (8,'bebidas'),
+                            (9,'relojes'),
+                            (10,'joyas'),
+                            (11,'ropa'),
+                            (12,'zapatos'),
+                            (13,'trajes'),
+                            (14,'adornos'),
+                            (15,'peliculas'),
+                            (16,'armas'),
+                            (17,'electronico');
 
 
 
