@@ -4,4 +4,5 @@ public interface ObjectSimpleRequestInterface {
     String getName();
 
     public String getImage();
+    public boolean getAr();
 }

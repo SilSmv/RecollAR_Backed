@@ -8,9 +8,18 @@ public class ObjectRequest {
     private String image;
     private int objectStatus;
     private float price;
+    private boolean ar;
 
     public Integer getIdObject() {
         return idObject;
+    }
+
+    public boolean getAr() {
+        return ar;
+    }
+
+    public void setAr(boolean ar) {
+        this.ar = ar;
     }
 
     public void setIdObject(Integer idObject) {

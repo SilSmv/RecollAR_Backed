@@ -39,6 +39,7 @@ public class ObjectService {
         objectModel.setName(objectRequest.getName());
         objectModel.setDescription(objectRequest.getDescription());
         objectModel.setImage(objectRequest.getImage());
+        objectModel.setAr(objectRequest.getAr());
         objectModel.setStatus(status);
         objectModel.setObjectStatus(objectRequest.getObjectStatus());
         objectModel.setPrice(objectRequest.getPrice());
@@ -60,6 +61,7 @@ public class ObjectService {
         objectModel.setDescription(objectRequest.getDescription());
         objectModel.setObjectStatus(objectRequest.getObjectStatus());
         objectModel.setPrice(objectRequest.getPrice());
+        objectModel.setAr(objectRequest.getAr());
         objectRepository.save(objectModel);
     }
     public void deleteObject(Integer idObject, Transaction transaction){

@@ -17,6 +17,7 @@ public class ObjectModel {
     private int objectStatus;
     private Integer status;
     private float price;
+    private boolean ar;
     private Date txDate;
     private Integer txIdUser;
     private String txHost;
@@ -90,6 +91,14 @@ public class ObjectModel {
         this.txHost=transaction.getTxHost();
         this.txIdUser=transaction.getTxIdUser();
         this.txUpdate=transaction.getTxUpdate();
+    }
+
+    public boolean getAr() {
+        return ar;
+    }
+
+    public void setAr(boolean ar) {
+        this.ar = ar;
     }
 
     @Override

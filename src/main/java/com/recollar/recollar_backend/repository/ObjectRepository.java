@@ -21,7 +21,7 @@ public interface ObjectRepository extends JpaRepository<ObjectModel,Integer> {
     @Query("update object o SET o.status = ?1, o.txHost = ?2, o.txUpdate = ?3 WHERE o.idObject = ?4")
     public void updateStatus(Integer status, String txHost, Date txUpdate, Integer idObject);
 
-    @Query(value = "select o.id_object idObject,o.name name, o.image image  from object o INNER JOIN collection c on c.id_collection=o.id_collection where o.id_collection = ?1 and o.status!=0 and c.status=1 and c.id_collector=?2 order by o.id_object DESC", nativeQuery = true)
+    @Query(value = "select o.id_object idObject,o.name name, o.image image ,o.ar ar from object o INNER JOIN collection c on c.id_collection=o.id_collection where o.id_collection = ?1 and o.status!=0 and c.status=1 and c.id_collector=?2 order by o.id_object DESC", nativeQuery = true)
     List<ObjectSimpleRequestInterface> findByCollectionId(Integer idCollection, Integer idCollector);
 
     @Query(value = "select * from object c where c.status = 1 and c.object_status = 2 or c.object_status = 3 order by c.id_collection DESC", nativeQuery = true)
