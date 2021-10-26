@@ -37,16 +37,10 @@ public class CollectionService {
 
     public void updateCollection(CollectionRequest collectionRequest, Transaction transaction){
 
-        UserInformationModel userInformationModel= UserUtil.getUser();
         status = 1 ;
-        CollectionsModel collectionModel = new CollectionsModel();
-        collectionModel.setIdCollection(collectionRequest.getIdCollection());
-        collectionModel.setIdCollector(userInformationModel.getIdCollector());
+        CollectionsModel collectionModel = collectionsRepository.getById(collectionRequest.getIdCollection());
         collectionModel.setName(collectionRequest.getName());
-        collectionModel.setAmount(0);
-        collectionModel.setStatus(status);
         collectionModel.setIdCategory(collectionRequest.getIdCategory());
-        collectionModel.setTransaction(transaction);
 
         collectionsRepository.save(collectionModel);
     }

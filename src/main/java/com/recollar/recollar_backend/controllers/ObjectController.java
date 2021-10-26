@@ -5,7 +5,9 @@ import com.recollar.recollar_backend.models.ObjectModel;
 import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.services.ObjectService;
 import com.recollar.recollar_backend.util.user.TransactionUtil;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,15 +20,15 @@ public class ObjectController {
     private ObjectService objectService;
 
     @PostMapping
-    public void create(@RequestBody ObjectRequest objectRequest, HttpServletRequest request) throws Exception {
+    public ObjectModel create(@RequestBody ObjectRequest objectRequest, HttpServletRequest request) throws Exception {
         Transaction transaction = TransactionUtil.createTransaction(request);
         System.out.println("Estoy en el controler");
-       objectService.createObject(objectRequest,transaction);
+       return objectService.createObject(objectRequest,transaction);
     }
     @PutMapping
     public void update(@RequestBody ObjectRequest objectRequest, HttpServletRequest request) throws Exception {
         Transaction transaction= TransactionUtil.createTransaction(request);
-        objectService.updateObject(objectRequest,transaction);
+        objectService.updateObject(objectRequest);
     }
     @DeleteMapping("/{idObject}")
     public void delete(@PathVariable int idObject, HttpServletRequest request) throws Exception {
@@ -46,10 +48,19 @@ public class ObjectController {
     public List<ObjectModel> getObjectAvailable() throws Exception {
         return objectService.getObjectsAvailable();
     }*/
-    @GetMapping("/search/{text}")
-    public List<ObjectModel> searchObject(@PathVariable String text) throws Exception {
+    @GetMapping("/public")
+    public List<ObjectModel> searchObject(@RequestParam(required = false) String text) throws Exception {
         return objectService.searchObjects(text);
     }
+    @RequestMapping(path="/image",method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void uploadImage(@RequestParam MultipartFile images, HttpServletRequest request, @RequestParam Integer idObject){
+        Transaction transaction= TransactionUtil.createTransaction(request);
+        objectService.uploadImage(images,idObject,transaction);
+    }
 
-
+    @RequestMapping(path="/change-status",method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void updateObjectStatus(@RequestParam Integer idObject,@RequestParam Integer objectStatus,HttpServletRequest request){
+        Transaction transaction= TransactionUtil.createTransaction(request);
+        objectService.updateObjectStatus(idObject,objectStatus,transaction);
+    }
 }

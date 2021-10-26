@@ -8,8 +8,10 @@ import com.recollar.recollar_backend.models.Transaction;
 import com.recollar.recollar_backend.models.UserInformationModel;
 import com.recollar.recollar_backend.repository.CollectionsRepository;
 import com.recollar.recollar_backend.repository.ObjectRepository;
+import com.recollar.recollar_backend.util.storage.StorageUtil;
 import com.recollar.recollar_backend.util.user.UserUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -28,7 +30,7 @@ public class ObjectService {
 
     private int status = 0;
 
-    public void createObject(ObjectRequest objectRequest, Transaction transaction){
+    public ObjectModel createObject(ObjectRequest objectRequest, Transaction transaction){
         int newAmount = 0;
         status = 1;
 
@@ -50,19 +52,14 @@ public class ObjectService {
             newAmount = auxcollectionsModel.getAmount()+1;
         }
         collectionsRepository.updateAmount(transaction.getTxHost(),transaction.getTxUpdate(), newAmount,idCollection);
+        return objectModel;
     }
-    public void updateObject(ObjectRequest objectRequest, Transaction transaction){
-        status = 1 ;
-        ObjectModel objectModel = new ObjectModel();
-        objectModel.setIdObject(objectRequest.getIdObject());
-        objectModel.setIdCollection(objectRequest.getIdCollection());
+    public void updateObject(ObjectRequest objectRequest){
+        ObjectModel objectModel = objectRepository.getById(objectRequest.getIdObject());
         objectModel.setName(objectRequest.getName());
         objectModel.setDescription(objectRequest.getDescription());
-        objectModel.setImage(objectRequest.getImage());
-        objectModel.setStatus(status);
         objectModel.setObjectStatus(objectRequest.getObjectStatus());
         objectModel.setPrice(objectRequest.getPrice());
-        objectModel.setTransaction(transaction);
         objectRepository.save(objectModel);
     }
     public void deleteObject(Integer idObject, Transaction transaction){
@@ -102,8 +99,19 @@ public class ObjectService {
         return objectRepository.getObjectAvailable();
     }
     public List<ObjectModel> searchObjects(String search){
-        System.out.println(search);
 
-        return objectRepository.getObjectSearch(search);
+        return search!=null?objectRepository.getObjectsSearch(search):objectRepository.getObjects();
     }
-}
+    public void uploadImage(MultipartFile image, Integer idObject, Transaction transaction) {
+        StorageUtil storageUtil = new StorageUtil();
+        String name = storageUtil.upload(image, "imageObject");
+        objectRepository.updateImage(transaction.getTxHost(), transaction.getTxUpdate(), name, idObject);
+    }
+    public void updateObjectStatus(Integer idObject, Integer objectStatus, Transaction transaction) {
+        System.out.println(objectStatus);
+        System.out.println(idObject);
+        objectRepository.updateObjectStatus(transaction.getTxHost(), transaction.getTxUpdate(), objectStatus,idObject);
+    }
+
+
+    }
