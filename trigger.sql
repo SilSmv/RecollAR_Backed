@@ -66,7 +66,7 @@ CREATE TRIGGER tg_insert_h_object
     AFTER INSERT ON object
     FOR EACH ROW
 BEGIN
-    INSERT INTO `h_object`(`id_object`,`id_collection`,`name`,`description`,`image`,`status`,`object_status`,`price`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_object,NEW.id_collection,NEW.name,NEW.description,NEW.image,NEW.status,NEW.object_status,NEW.price,NOW(),NEW.tx_id_user,NEW.tx_host,NOW());
+    INSERT INTO `h_object`(`id_object`,`ar`,`id_collection`,`name`,`description`,`image`,`status`,`object_status`,`price`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_object,NEW.ar,NEW.id_collection,NEW.name,NEW.description,NEW.image,NEW.status,NEW.object_status,NEW.price,NOW(),NEW.tx_id_user,NEW.tx_host,NOW());
 END;
 |
 DELIMITER ;
@@ -76,7 +76,7 @@ CREATE TRIGGER tg_update_h_object
     AFTER UPDATE ON object
     FOR EACH ROW
 BEGIN
-    INSERT INTO `h_object`(`id_object`,`id_collection`,`name`,`description`,`image`,`status`,`object_status`,`price`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_object,NEW.id_collection,NEW.name,NEW.description,NEW.image,NEW.status,NEW.object_status,NEW.price,OLD.tx_date,NEW.tx_id_user,NEW.tx_host,NOW());
+    INSERT INTO `h_object`(`id_object`,`ar`,`id_collection`,`name`,`description`,`image`,`status`,`object_status`,`price`,`tx_date`,`tx_id_user`,`tx_host`,`tx_update`) VALUES ( NEW.id_object,NEW.ar,NEW.id_collection,NEW.name,NEW.description,NEW.image,NEW.status,NEW.object_status,NEW.price,OLD.tx_date,NEW.tx_id_user,NEW.tx_host,NOW());
 END;
 |
 DELIMITER ;
