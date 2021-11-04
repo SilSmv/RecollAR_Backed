@@ -94,8 +94,17 @@ public class ObjectService {
     }
     public ObjectModel getObjectById(Integer idObject){
         UserInformationModel userInformationModel= UserUtil.getUser();
-
-        return objectRepository.getByIdWithVerification(idObject,userInformationModel.getIdCollector());
+        System.out.println(idObject);
+        var obj=objectRepository.getByIdWithVerification(idObject,userInformationModel.getIdCollector());
+        System.out.println(obj);
+        return obj;
+    }
+    public ObjectModel getObjectByIdPublic(Integer idObject){
+        UserInformationModel userInformationModel= UserUtil.getUser();
+        System.out.println(idObject);
+        var obj=objectRepository.getByIdPublic(idObject);
+        System.out.println(obj);
+        return obj;
     }
     public List<ObjectModel> getObjectsAvailable(){
         return objectRepository.getObjectAvailable();

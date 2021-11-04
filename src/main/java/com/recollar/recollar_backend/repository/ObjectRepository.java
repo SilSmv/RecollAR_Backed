@@ -35,6 +35,10 @@ public interface ObjectRepository extends JpaRepository<ObjectModel,Integer> {
 
     @Query(value = "select o.* from object o INNER JOIN collection c on c.id_collection=o.id_collection where o.id_object= ?1 and o.status!=0 and c.status=1 and c.id_collector=?2", nativeQuery = true)
     ObjectModel getByIdWithVerification(@Param("idObject") Integer idObject,@Param("idCollector") Integer idCollector);
+
+    @Query(value = "select o.* from object o INNER JOIN collection c on c.id_collection=o.id_collection where o.id_object= ?1 and o.status!=0 and o.status !=1 and c.status=1", nativeQuery = true)
+    ObjectModel getByIdPublic(@Param("idObject") Integer idObject);
+
     @Modifying
     @Transactional
     @Query("update object h SET h.txHost = ?1, h.txUpdate = ?2, h.image = ?3 WHERE h.idObject = ?4 and h.status !=0")

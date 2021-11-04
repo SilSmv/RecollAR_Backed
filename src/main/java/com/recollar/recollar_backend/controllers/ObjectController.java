@@ -41,8 +41,13 @@ public class ObjectController {
     }
 
     @GetMapping("/{id_object}")
-    public ObjectModel getOne(@PathVariable(value = "id_object") Integer idObject)  {
-        return objectService.getObjectById(idObject);
+    public ObjectModel getOne(@PathVariable(value = "id_object") Integer idObject,@RequestParam(required = false) boolean pub)  {
+        if(pub){
+            return objectService.getObjectByIdPublic(idObject);
+        }
+        else{
+            return objectService.getObjectById(idObject);
+        }
     }
     /*@GetMapping("/available")
     public List<ObjectModel> getObjectAvailable() throws Exception {
